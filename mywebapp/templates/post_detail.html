@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family:'Montserrat','Arial',sans-serif';
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        h1 {
+            font-size: 4.1rem;
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Main Container */
+        .post-container {
+            width: 75%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        /* Content Styling */
+        .post-content {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+           
+           
+        }
+
+        /* Comment Section */
+        .comment-section {
+            margin-top: 50px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        .comment {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .comment p {
+            margin: 5px 0;
+        }
+
+        .comment small {
+            color: #aaa;
+        }
+
+        /* Comment Form */
+        .comment-form {
+            margin-top: 40px;
+        }
+
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .comment-form button {
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .comment-form button:hover {
+            background-color: #00449e;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #333;
+            color: #fff;
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .post-container {
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .comment-form input, .comment-form textarea {
+                font-size: 1rem;
+            }
+        }
+
+        .homebutton{
+            font-size:1rem;
+            background-color:crimson;
+            color:white;
+            border-radius:6px;
+            text-decoration:none;
+            padding:8px;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <div class="post-container">
+        <h1>{{ post.title }}</h1>
+        <p><em>Posted on {{ post.created_at }}</em></p>
+
+        
+        
+        <div class="post-content">
+            {{ post.content|safe }}  <!-- Assuming the post content includes HTML -->
+        </div>
+
+   
+
+        <a class="homebutton" href="{% url 'homepage' %}">Back to Homepage</a>
+
+        <!-- Comment Section -->
+        <div class="comment-section">
+            <h3>Comments</h3>
+            {% for comment in comments %}
+                <div class="comment">
+                    <p><strong>{{ comment.author }}</strong> said:</p>
+                    <p>{{ comment.body }}</p>
+                    <p><small>Posted on {{ comment.created_at }}</small></p>
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </div>
+        
+
+        <!-- Comment Form -->
+        <div class="comment-form">
+            <h3>Add a Comment</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 - <a href="{% url 'homepage' %}">NooraVogue</a></p>
+    </div>
+
+</body>
+</html>

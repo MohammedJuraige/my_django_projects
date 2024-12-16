@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        /* Header Styling */
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin-top: 20px;
+            font-size: 36px;
+        }
+        
+        /* Page Container */
+        .page-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        /* Content Paragraphs */
+        .page-container p {
+            line-height: 1.6;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0056b3;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer a {
+            color: #f8f9fa;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+
+
+    </style>
+</head>
+<body>
+    <h1>{{ page.title }}</h1>
+    <div>
+        {{ page.content|safe }}  <!-- Render rich content safely -->
+    </div>
+    <a href="{% url 'homepage' %}">Back to Homepage</a>
+</body>
+</html>

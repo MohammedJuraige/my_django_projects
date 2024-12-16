@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit {{ page.title }}</title>
+    <style>
+       
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        form button:hover {
+            background-color: #003f7f;
+        }
+        
+        
+
+
+    </style>
+</head>
+<body>
+    <h1>Edit Page: {{ page.title }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{% url 'page_detail' page.slug %}">Cancel</a>
+</body>
+</html>
